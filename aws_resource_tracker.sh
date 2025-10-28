@@ -1,29 +1,11 @@
-#!/bin/bash
+# Cron Job (Run every 2 minutes)
+*/2 * * * * /home/ubuntu/aws_resource_tracker.sh >> /home/ubuntu/aws_resource_tracker.log 2>&1
 
-###############################
-# author: ashok
-# Date: 27-10-2025
-# 
-# version: v1
-#
-# This script will report the aws resource usage
-##############################################################
+# Log File
+/home/ubuntu/aws_resource_tracker.log
 
-# aws s3
-# aws ec2
-# aws lambda
-# aws IAM users
+# To view the output:
+cat /home/ubuntu/aws_resource_tracker.log
 
-set -x
-
-# list s3 buckets
-aws s3 ls
-
-# list ec2 instances
-aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId'
-
-# list aws lambda
-aws lambda list-functions
-
-# list IAM users
-aws iam list-users | jq '.Users[].UserName'
+# see live updates every 2 minutes:
+tail -f /home/ubuntu/aws_resource_tracker.log
