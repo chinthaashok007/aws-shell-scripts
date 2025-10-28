@@ -1,29 +1,34 @@
+# 🧩 AWS Resource Tracker Script
+
+This script lists important AWS resources such as S3 buckets, EC2 instances, Lambda functions, and IAM users.  
+It helps track your AWS resource usage and can be automated using `cron`.
+
+---
+
+## 📜 Script: `aws_resource_tracker.sh`
+
+```bash
 #!/bin/bash
 
 ###############################
-# author: ashok
+# Author: Ashok
 # Date: 27-10-2025
-# 
-# version: v1
+# Version: v1
 #
-# This script will report the aws resource usage
-##############################################################
-
-# aws s3
-# aws ec2
-# aws lambda
-# aws IAM users
+# Description:
+# This script reports AWS resource usage.
+###############################
 
 set -x
 
-# list s3 buckets
+# List S3 buckets
 aws s3 ls
 
-# list ec2 instances
+# List EC2 instances
 aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId'
 
-# list aws lambda
+# List AWS Lambda functions
 aws lambda list-functions
 
-# list IAM users
+# List IAM users
 aws iam list-users | jq '.Users[].UserName'
